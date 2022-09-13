@@ -1,42 +1,19 @@
 import "./App.css";
 import { React, useEffect, useState } from "react";
+import options from "./components/options";
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [windowSize, setWindowSize] = useState(getWindowSize());
+  const [ideje, setIdeje] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("https://zanlah.si/kosilo_api")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-        },
-
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+    setIdeje(options());
   }
 
   useEffect(() => {
-    fetch("https://zanlah.si/kosilo_api")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-        },
-
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-
+    setIdeje(options());
     //make content height exact dimensions on usable screen
     function handleWindowResize() {
       setWindowSize(getWindowSize());
@@ -56,16 +33,7 @@ function App() {
         className="flex text-center justify-center items-center p-2"
       >
         <div>
-          {!isLoaded && (
-            <div className="flex items-center justify-center space-x-2 animate-bounce h-8">
-              <div className="w-4 h-4 bg-indigo-300 rounded-full"></div>
-              <div className="w-4 h-4 bg-indigo-300 rounded-full"></div>
-              <div className="w-4 h-4 bg-indigo-300 rounded-full"></div>
-            </div>
-          )}
-          {isLoaded && (
-            <h1 className="text-2xl font-semibold"> {items.ideja}</h1>
-          )}
+          <h1 className="text-3xl font-semibold"> {ideje}</h1>
           <div className="absolute bottom-0 right-0 w-full pb-4">
             <button
               onClick={handleSubmit}
