@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { React, useEffect, useState } from "react";
 function App() {
@@ -8,7 +7,6 @@ function App() {
   const [windowSize, setWindowSize] = useState(getWindowSize());
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("klik");
     fetch("https://zanlah.si/kosilo_api")
       .then((res) => res.json())
       .then(
@@ -38,6 +36,8 @@ function App() {
           setError(error);
         }
       );
+
+    //make content height exact dimensions on usable screen
     function handleWindowResize() {
       setWindowSize(getWindowSize());
     }
